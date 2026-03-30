@@ -29,3 +29,40 @@ select * from products limit 3;
 select name as item_name , price as item_price from products;
 
 select distinct category from products;
+
+--clause with operators
+
+select * from products where price between 400 and 1000;
+
+select * from products where category in ('Electronics','Accessories');
+
+select * from products where sku_code like 'W%';
+select * from products where sku_code like '%123';
+select * from products where sku_code like '_B%';
+
+select * from products where not category='Electronics';
+
+--aggregation functions
+
+select count(stock_quantity) from products;
+select sum(price) from products;
+
+/* Q1. Display the name and price of the cheapest product in the
+entire table.
+Q2.Find the average price of products that belong to the 'Home &
+Kitchen' or 'Fitness' category.
+Q3. Show product names and stock quantity where the product is
+available, stock is more than 50, and price is not equal to ₹299.
+Q4. Find the most expensive product in each category (name and
+price).
+Q5. Show all unique categories in uppercase, sorted in descending
+order.*/
+
+select name , price from products where price=(select min(price) from products);
+select avg(price) from products where category in ('Home & Kitchen', 'Fitness');
+select  name , stock_quantity from products where is_available=true and stock_quantity>50 and price!=299;
+select category , Max(price) from products 
+Group by category;
+select  distinct upper(category) from products order by  upper(category)DESC;
+
+
