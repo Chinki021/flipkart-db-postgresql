@@ -97,3 +97,35 @@ case
 end;
 select name , price , price_tag from products;
 
+
+
+/*Ok now lets do one important question inside is available
+column you have boolean true and false show case a new
+column to with in_stock and out of stock.*/
+
+select name,
+case
+	when is_available=true then 'in_stock'
+	else 'out_of_stock'
+end as availability_status
+from products;
+
+SELECT name, is_available FROM products;
+
+/*HIGHLIGHT STOCK STATUS
+“ Show product name, stock quantity, and label:
+"High Stock" if quantity > 100
+"Medium Stock" if between 30 and 100
+"Low Stock" otherwise*/
+
+select name,stock_quantity,
+case
+	WHEN stock_quantity>100 then 'high stock'
+	WHEN stock_quantity between 30 and 100 then 'Medium stock'
+	else 'low stock'
+end as label
+from products;
+
+
+
+
