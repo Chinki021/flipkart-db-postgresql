@@ -126,6 +126,53 @@ case
 end as label
 from products;
 
+--one to one relationship
+
+create table students(
+student_id serial primary key,
+name varchar(20)
+);
+
+insert into students(name)
+values
+('chinki'),
+('pandii'),
+('gandi');
+
+select * from students;
+
+create table student_profile(
+student_id int primary key,
+address varchar(50),
+age int,
+roll_number int
+);
+
+insert into student_profile(student_id,address,age,roll_number)
+values
+(1,'muzaffarpur',21,21),
+(2,'punjab',34,01),
+(3,'Bihar',98,09);
+
+select * from student_profile;
+
+alter table student_profile
+add constraint fk_student_profile
+foreign key (student_id)
+references students(student_id);
+
+select
+s.student_id,
+s.name,
+sp.address,
+sp.age,
+sp.roll_number
+from students s
+join student_profile sp
+on  s.student_id=sp.student_id
+
+
+
 
 
 
