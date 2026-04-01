@@ -65,4 +65,35 @@ select category , Max(price) from products
 Group by category;
 select  distinct upper(category) from products order by  upper(category)DESC;
 
+/*Best way to learn the case is using a simple example
+where you will add a custom column in which you will
+have price_tag. 
+If the price is above 1000 you will say it is expensive. 
+If the price is between 500 and 1000 you will say it is
+moderate. 
+and If the price is below 500 it is cheap.*/
+
+select name , price,
+case
+ WHEN price > 1000 then 'expensive'
+ WHEN price between 500 and 1000 then 'moderate'
+	else 'cheap'
+end as price_tag
+from products;
+
+--THIS WAS JUST A SNAPSHOT , NOT PERMANENT CHANGE IN TABLE
+
+--LETS create a permanent column for this
+
+alter table products
+add column price_tag text;
+
+update products
+set price_tag=
+case
+ WHEN price > 1000 then 'expensive'
+ WHEN price between 500 and 1000 then 'moderate'
+	else 'cheap'
+end;
+select name , price , price_tag from products;
 
